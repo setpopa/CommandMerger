@@ -26,7 +26,7 @@ namespace CommandMerger
                     _permission = commandPermissions.Permission;
                     foreach (var commands in commandPermissions.Commands)
                     {
-                        Commands cmd = new Commands(_permission,commands.CommandName,commands.Commands);
+                        CommandCreator cmd = new CommandCreator(_permission,commands.CommandName,commands.Commands);
                         R.Commands.Register(cmd);
                     }                  
                 }

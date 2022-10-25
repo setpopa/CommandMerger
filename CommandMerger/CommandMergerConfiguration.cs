@@ -6,18 +6,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Rocket.API.Serialisation;
+using System.Xml.Serialization;
 
 namespace CommandMerger
 {
+
     public class CommandMergerConfiguration : IRocketPluginConfiguration
     {
 
-        public HashSet<CommandMergedPermisions> CommandsMergedsPermissions;
+        public HashSet<CommandPermision> CommandsMergedsPermissions;
         public void LoadDefaults()
         {
-            CommandsMergedsPermissions = new HashSet<CommandMergedPermisions>
+            CommandsMergedsPermissions = new HashSet<CommandPermision>
             {
-                new CommandMergedPermisions()
+                new CommandPermision()
                 {
                     Permission = "commandmerger.newcommand",
                     Commands = new HashSet<Command>
@@ -25,7 +27,7 @@ namespace CommandMerger
                         new Command()
                         {
                             CommandName = "mycommand",
-                            Commands = new List<string>
+                            Commands = new string[]
                             {
                                 "rocket",
                                 "heal",
@@ -34,7 +36,7 @@ namespace CommandMerger
                         }
                     }
                 },
-                new CommandMergedPermisions()
+                new CommandPermision()
                 {
                     Permission = "commandmerger.newcommand2",
                     Commands = new HashSet<Command>
@@ -42,7 +44,7 @@ namespace CommandMerger
                         new Command()
                         {
                             CommandName = "mycommand2",
-                            Commands = new List<string>
+                            Commands = new string[]
                             {
                                 "rocket",
                                 "tp setpopa"
@@ -54,4 +56,25 @@ namespace CommandMerger
             
         }
     }
+    public class CommandPermision
+    {       
+        public string Permission { get; set; }       
+        public HashSet<Command> Commands { get; set; }
+        public CommandPermision()
+        {
+
+        }
+    }
+    public class Command
+    {
+        public string CommandName { get; set; }
+        [XmlArray(ElementName = "Command")]
+        public string[] Commands { get; set; }
+
+        public Command()
+        {
+
+        }
+    }
+
 }
