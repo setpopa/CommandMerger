@@ -68,7 +68,8 @@ namespace CommandMerger
     public class Command
     {
         public string CommandName { get; set; }
-        [XmlArray(ElementName = "Command")]
+        [XmlArrayItem("Command")]
+        [XmlArray(ElementName = "Commands")]
         public string[] Commands { get; set; }
 
         public Command()
