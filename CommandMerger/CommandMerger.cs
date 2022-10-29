@@ -19,9 +19,9 @@ namespace CommandMerger
         {
             Inst = this;
             Conf = Configuration.Instance;
-            if (Configuration != null && Configuration.Instance.CommandsMergedsPermissions.Count != 0)
+            if (Configuration != null && Conf.CommandsMergedsPermissions.Count != 0)
             {
-                foreach (var commandPermissions in Configuration.Instance.CommandsMergedsPermissions)
+                foreach (var commandPermissions in Conf.CommandsMergedsPermissions)
                 {
                     _permission = commandPermissions.Permission;
                     foreach (var commands in commandPermissions.Commands)
@@ -38,7 +38,7 @@ namespace CommandMerger
             Inst = null;
             Conf = null;
             Logger.Log($"Plugin {Name} unloaded.");
-            foreach (var command in Configuration.Instance.CommandsMergedsPermissions)
+            foreach (var command in Conf.CommandsMergedsPermissions)
             {
                 R.Commands.DeregisterFromAssembly(this.Assembly);
             }
